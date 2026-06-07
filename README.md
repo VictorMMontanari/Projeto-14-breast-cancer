@@ -37,6 +37,34 @@ Em problemas clínicos a assimetria do custo dos erros é crítica: falsos negat
 2. Instalar dependências (ex.: `scikit-learn`, `pandas`, `numpy`, `matplotlib`, `seaborn`).
 3. Executar o notebook `projeto_14_breast_cancer_v2.ipynb` que acompanha este repositório.
 
+Validação cruzada: o notebook inclui uma seção com validação cruzada estratificada (`StratifiedKFold`, 5 folds) para preservar a proporção das classes em cada fold. Nessa seção são calculadas as métricas médias e seus desvios-padrão (accuracy, precision, recall, F1 e AUC). Consulte a célula "Validação Cruzada Estratificada (StratifiedKFold)" em `projeto_14_breast_cancer_v2.ipynb` para detalhes e resultados.
+
+## Informações de Entrega (P2) e Modelo Salvo
+
+- **Modelo final salvo:** `model/model_final.joblib` (formato Joblib). O notebook agora salva automaticamente o melhor modelo selecionado (com base em AUC na validação) e o `StandardScaler` em `model/` quando aplicável.
+- **Como executar o notebook:** criar e ativar um ambiente virtual (recomendado `python -m venv .venv`), instalar dependências com `pip install -r requirements.txt` e abrir o notebook em Jupyter/Colab. Ajuste o caminho do dataset na célula de carregamento se necessário.
+- **Como usar o modelo no app (quando criar o Streamlit):** carregar `model/model_final.joblib` com `joblib.load()`; se existir `model/scaler.joblib`, usá-lo para transformar entradas antes da predição.
+- **Estrutura mínima esperada no repositório (P2):**
+	- `app.py` (Streamlit)
+	- `requirements.txt`
+	- `README.md`
+	- `notebooks/projeto_14_breast_cancer_v2.ipynb`
+	- `model/model_final.joblib` (ou `.pkl/.joblib`)
+	- `reports/relatorio_atualizado.pdf`
+	- `data/` (dataset)
+
+## Checklist (status)
+- Notebook atualizado: ✅
+- `requirements.txt` com versões travadas: ✅
+- `README.md` atualizado com validação cruzada e instruções: ✅
+- Modelo final salvo (`model/model_final.joblib`): ✅
+- `model/scaler.joblib` salvo (se aplicável): ✅
+- Relatório PDF atualizado: ❌
+- Aplicação Streamlit: ❌
+- Deploy Streamlit: ❌
+- Repositório GitHub público: ❌
+- Vídeos individuais: ❌
+
 ## Observações
 Se quiser, posso:
 - Inserir a tabela completa de métricas (acurácia / precisão / recall / F1 / AUC) no README;
