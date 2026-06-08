@@ -2,7 +2,10 @@
 
 ## Identificação
 - **Nome do projeto:** Classificação de Câncer de Mama — P2
-- **Integrantes / RAs:** (preencher com nomes e RAs do grupo)
+
+- Heitor Shoji Kimura — 2077610
+- Victor Marinelli Montanari — 2046734
+- João Pedro Parussolo Santos — 2031928
 
 ## Descrição do problema
 Classificação binária para distinguir tumores benignos e malignos usando o dataset Breast Cancer Wisconsin (UCI / Kaggle). O objetivo é treinar um classificador com boa sensibilidade (recall) para reduzir falsos negativos em contexto clínico.
@@ -105,15 +108,7 @@ if scaler_path.exists():
 - Incluir botão de predição e interpretação simples do resultado (Benigno / Maligno), com indicação de probabilidade e aviso sobre limitações clínicas.
 
 ## Checklist para entrega (P2)
-- [x] Notebook atualizado com as melhorias solicitadas (EDA ampliada; StratifiedKFold; SelectKBest).
-- [x] `requirements.txt` com versões travadas.
-- [x] Salvar modelo com `joblib` em `model/model_final.joblib` e `model/scaler.joblib` (quando aplicável).
-- [ ] Relatório atualizado em PDF (`reports/relatorio_atualizado.pdf`).
-- [ ] Implementar `app.py` em Streamlit e testar localmente.
-- [ ] Publicar app no Streamlit Community Cloud e adicionar link no README.
-- [ ] Organizar e subir o repositório público no GitHub (incluir todos os arquivos exigidos).
-- [ ] Gravar vídeos individuais (9–12 minutos) explicando notebook e demonstração do app.
-- [ ] Testar execução do notebook do zero (run all) em ambiente limpo.
+- Consulte a seção "Checklist de Submissão (conforme orientações do PDF)" mais abaixo para o checklist consolidado e itens de verificação finais.
 
 ## Limitações e observações
 - Este repositório contém o notebook finalizado e o código para salvar o modelo; a aplicação Streamlit e o relatório em PDF devem ser gerados e adicionados antes da submissão final no Moodle.
@@ -124,3 +119,47 @@ if scaler_path.exists():
 
 ---
 *Arquivo gerado automaticamente para atender ao padrão de entrega da P2.*
+
+## Checklist de Submissão (conforme orientações do PDF)
+
+Antes de realizar a entrega no Moodle, verifique os itens abaixo e confirme que estão presentes e funcionais no repositório:
+
+- [ ] Link do notebook atualizado (`notebooks/projeto_14_breast_cancer_v2.ipynb`) — o notebook deve conter todas as melhorias realizadas após a P1.
+- [ ] Relatório atualizado em PDF (`reports/relatorio_atualizado.pdf`) — coerente com os resultados e com o notebook.
+- [ ] Link do repositório GitHub público com todos os arquivos necessários.
+- [ ] Modelo final salvo em `model/` (`model_final.joblib` ou .pkl) e carregável pelo app.
+- [ ] `requirements.txt` atualizado com versões travadas.
+- [ ] App Streamlit implementado (`app.py`) e testado localmente.
+- [ ] Deploy do app publicado (Streamlit Community Cloud) e link disponível no `README.md` principal.
+- [ ] Vídeos individuais (cada integrante) com câmera aberta, áudio claro, compartilhamento de tela e link do Google Drive com permissão de visualização.
+- [ ] Todos os links testados e acessíveis (GitHub, app, Google Drive).
+
+## Checklist técnico pré-envio (verificações rápidas)
+
+Execute estas verificações finais em um ambiente limpo antes de submeter:
+
+1. `pip install -r requirements.txt` roda sem erros.
+2. `notebooks/projeto_14_breast_cancer_v2.ipynb` executa em sequência (Run All) sem erros no seu ambiente local (ajuste caminhos de `data/` se necessário).
+3. `model/model_final.joblib` carrega com `joblib.load()` e permite `model.predict()` no conjunto de teste.
+4. `app.py` (quando implementado) importa `joblib`, carrega o `scaler.joblib` (se existir) e produz predições consistentes com o notebook.
+5. Relatório PDF (`reports/relatorio_atualizado.pdf`) descreve as mudanças feitas após a P1, justificativas para decisões, e inclui principais gráficos e métricas.
+
+## Roteiro de entrega sugerido (passo a passo)
+
+1. Atualizar `notebooks/projeto_14_breast_cancer_v2.ipynb` e executar tudo localmente.
+2. Gerar `reports/relatorio_atualizado.pdf` a partir do notebook (ou compilar relatório manualmente), colocando em `reports/`.
+3. Salvar o modelo final com `joblib` em `model/model_final.joblib` e salvar `model/scaler.joblib` se aplicável.
+4. Implementar `app.py` em Streamlit que carregue o modelo salvo e aceite entradas do usuário.
+5. Testar o app localmente e, se OK, publicar no Streamlit Community Cloud.
+6. Garantir que `README.md` (principal) contenha o link do app, instruções e o checklist de submissão.
+7. Reunir vídeos individuais e disponibilizar links no Google Drive com permissão de visualização.
+8. Fazer a submissão única no Moodle (apenas um integrante) incluindo links e arquivos requisitados.
+
+## Observações finais (compatibilidade com o PDF)
+
+Este `README_P2.md` foi atualizado para refletir os requisitos detalhados no documento de P2 e inclui o checklist que deve ser seguido antes da submissão no Moodle. Se quiser, posso:
+
+- Gerar um template mínimo de `app.py` em Streamlit que já carregue `model/model_final.joblib` e aceite as 15 features selecionadas.
+- Gerar o esboço do `reports/relatorio_atualizado.pdf` a partir dos resultados do notebook.
+
+Informe qual desses itens você prefere que eu implemente a seguir.
