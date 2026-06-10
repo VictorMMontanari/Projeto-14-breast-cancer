@@ -60,9 +60,7 @@ projeto_14_breast_cancer/
 │   └── model_final.joblib    
 │   └── scaler.joblib         
 ├── reports/
-│   └── README.md
-│   └── all_features_stats.csv
-│   └── metrics_summary.json
+│   └── projeto_14_breast_cancer_v3.pdf
 │
 └── data/
     └── all_features_stats.csv
@@ -137,7 +135,7 @@ streamlit run app.py
 4. Abra no navegador o endereço exibido no terminal (normalmente `http://localhost:8501`).
 
 ## Link do app publicado
-- Ainda não publicado. Inserir aqui o link do Streamlit Community Cloud após o deploy.
+- [Link do Streamlit](https://projeto-14-breast-cancer-dynolramurz7ugxjyejqky.streamlit.app/)
 
 ## Limitações e observações
 - Este repositório contém o notebook finalizado e o código para salvar o modelo; a aplicação Streamlit e o relatório em PDF devem ser gerados e adicionados antes da submissão final no Moodle.
