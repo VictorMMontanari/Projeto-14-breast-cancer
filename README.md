@@ -135,7 +135,7 @@ streamlit run app.py
 4. Abra no navegador o endereço exibido no terminal (normalmente `http://localhost:8501`).
 
 ## Link do app publicado
-- [Link do Streamlit](https://projeto-14-breast-cancer-dynolramurz7ugxjyejqky.streamlit.app/)
+- [Link do Streamlit](https://projeto-14-breast-cancer-q7nhftroppdcb2bhcjqubs.streamlit.app/)
 
 ## Limitações e observações
 - Este repositório contém o notebook finalizado e o código para salvar o modelo; a aplicação Streamlit e o relatório em PDF devem ser gerados e adicionados antes da submissão final no Moodle.
