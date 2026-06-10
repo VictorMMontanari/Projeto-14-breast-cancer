@@ -42,26 +42,39 @@ Classificação binária para distinguir tumores benignos e malignos usando o da
 - As features do tipo `*_worst` mostraram maior poder discriminativo (ex.: `concave points_worst`, `perimeter_worst`, `radius_worst`).
 - A validação cruzada estratificada (5 folds) está implementada no notebook e apresenta médias ± desvios-padrão para as métricas.
 
-## Estrutura mínima do repositório (P2)
+## Estrutura do repositório
 ```
 projeto_14_breast_cancer/
 │
 ├── app.py                    
-├── requirements.txt          
+├── requirimente.txt
 ├── README.md                
 │
 ├── notebooks/
 │   └── projeto_14_breast_cancer_v2.ipynb
 │
 ├── model/
+│   └── features.joblib
 │   └── model_final.joblib    
 │   └── scaler.joblib         
 ├── reports/
-│   └── relatorio_atualizado.pdf
+│   └── README.md
+│   └── all_features_stats.csv
+│   └── metrics_summary.json
 │
 └── data/
-    └── dataset.csv
+    └── all_features_stats.csv
+    └── data.csv
 ```
+
+## Tecnologias utilizadas
+- Python 3
+- Pandas e NumPy para manipulação de dados
+- Matplotlib e Seaborn para visualizações
+- Scikit-learn para modelagem e avaliação
+- Joblib para serialização do modelo
+- Jupyter Notebook para experimentação
+- Streamlit para interface web
 
 ## Como reproduzir (notebook)
 1. Criar e ativar um ambiente virtual Python recomendado:
@@ -100,64 +113,33 @@ if scaler_path.exists():
 # y_pred = model.predict(X_proc)
 ```
 
-## Instruções para a aplicação Streamlit (quando for implementada)
-- Carregar `model/model_final.joblib` e `model/scaler.joblib` conforme exemplo acima.
-- Criar inputs compatíveis com as 15 features utilizadas pelo modelo final.
-- Incluir botão de predição e interpretação simples do resultado (Benigno / Maligno), com indicação de probabilidade e aviso sobre limitações clínicas.
+## Instruções para executar o app Streamlit
+1. Ative o ambiente virtual:
 
-## Checklist para entrega (P2)
-- Consulte a seção "Checklist de Submissão (conforme orientações do PDF)" mais abaixo para o checklist consolidado e itens de verificação finais.
+```bash
+source .venv/bin/activate
+```
+
+2. Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Execute o aplicativo:
+
+```bash
+streamlit run app.py
+```
+
+4. Abra no navegador o endereço exibido no terminal (normalmente `http://localhost:8501`).
+
+## Link do app publicado
+- Ainda não publicado. Inserir aqui o link do Streamlit Community Cloud após o deploy.
 
 ## Limitações e observações
 - Este repositório contém o notebook finalizado e o código para salvar o modelo; a aplicação Streamlit e o relatório em PDF devem ser gerados e adicionados antes da submissão final no Moodle.
 - Em contexto clínico, resultados devem ser interpretados por especialistas e o modelo não substitui exame clínico ou patologia.
 
-## Contato
-- Dúvidas ou ajustes: adicionar seção com e-mail dos integrantes ou usar issues no repositório GitHub (quando criado).
-
----
-*Arquivo gerado automaticamente para atender ao padrão de entrega da P2.*
-
-## Checklist de Submissão (conforme orientações do PDF)
-
-Antes de realizar a entrega no Moodle, verifique os itens abaixo e confirme que estão presentes e funcionais no repositório:
-
-- [ ] Link do notebook atualizado (`notebooks/projeto_14_breast_cancer_v2.ipynb`) — o notebook deve conter todas as melhorias realizadas após a P1.
-- [ ] Relatório atualizado em PDF (`reports/relatorio_atualizado.pdf`) — coerente com os resultados e com o notebook.
-- [ ] Link do repositório GitHub público com todos os arquivos necessários.
-- [ ] Modelo final salvo em `model/` (`model_final.joblib` ou .pkl) e carregável pelo app.
-- [ ] `requirements.txt` atualizado com versões travadas.
-- [ ] App Streamlit implementado (`app.py`) e testado localmente.
-- [ ] Deploy do app publicado (Streamlit Community Cloud) e link disponível no `README.md` principal.
-- [ ] Vídeos individuais (cada integrante) com câmera aberta, áudio claro, compartilhamento de tela e link do Google Drive com permissão de visualização.
-- [ ] Todos os links testados e acessíveis (GitHub, app, Google Drive).
-
-## Checklist técnico pré-envio (verificações rápidas)
-
-Execute estas verificações finais em um ambiente limpo antes de submeter:
-
-1. `pip install -r requirements.txt` roda sem erros.
-2. `notebooks/projeto_14_breast_cancer_v2.ipynb` executa em sequência (Run All) sem erros no seu ambiente local (ajuste caminhos de `data/` se necessário).
-3. `model/model_final.joblib` carrega com `joblib.load()` e permite `model.predict()` no conjunto de teste.
-4. `app.py` (quando implementado) importa `joblib`, carrega o `scaler.joblib` (se existir) e produz predições consistentes com o notebook.
-5. Relatório PDF (`reports/relatorio_atualizado.pdf`) descreve as mudanças feitas após a P1, justificativas para decisões, e inclui principais gráficos e métricas.
-
-## Roteiro de entrega sugerido (passo a passo)
-
-1. Atualizar `notebooks/projeto_14_breast_cancer_v2.ipynb` e executar tudo localmente.
-2. Gerar `reports/relatorio_atualizado.pdf` a partir do notebook (ou compilar relatório manualmente), colocando em `reports/`.
-3. Salvar o modelo final com `joblib` em `model/model_final.joblib` e salvar `model/scaler.joblib` se aplicável.
-4. Implementar `app.py` em Streamlit que carregue o modelo salvo e aceite entradas do usuário.
-5. Testar o app localmente e, se OK, publicar no Streamlit Community Cloud.
-6. Garantir que `README.md` (principal) contenha o link do app, instruções e o checklist de submissão.
-7. Reunir vídeos individuais e disponibilizar links no Google Drive com permissão de visualização.
-8. Fazer a submissão única no Moodle (apenas um integrante) incluindo links e arquivos requisitados.
-
-## Observações finais (compatibilidade com o PDF)
-
-Este `README_P2.md` foi atualizado para refletir os requisitos detalhados no documento de P2 e inclui o checklist que deve ser seguido antes da submissão no Moodle. Se quiser, posso:
-
-- Gerar um template mínimo de `app.py` em Streamlit que já carregue `model/model_final.joblib` e aceite as 15 features selecionadas.
-- Gerar o esboço do `reports/relatorio_atualizado.pdf` a partir dos resultados do notebook.
-
-Informe qual desses itens você prefere que eu implemente a seguir.
+## Conclusão
+O projeto atingiu o objetivo de construir e avaliar um classificador para câncer de mama com bom desempenho, destacando a Regressão Logística como modelo final pelo equilíbrio entre desempenho, sensibilidade e interpretabilidade. Como próximos passos, recomenda-se publicar o app em produção, versionar resultados por experimento e ampliar validações para reforçar robustez clínica.
