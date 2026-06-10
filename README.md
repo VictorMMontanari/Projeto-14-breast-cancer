@@ -1,47 +1,147 @@
-# Projeto 14 — Classificação de Câncer de Mama
+# Projeto 14 — Classificação de Câncer de Mama (Entrega P2)
 
-## Visão Geral
-Desafio do curso A.I — Grupo 14. Objetivo: construir um classificador binário capaz de distinguir tumores benignos de malignos usando o dataset Breast Cancer Wisconsin (Kaggle: uciml/breast-cancer-wisconsin-data).
+## Identificação
+- **Nome do projeto:** Classificação de Câncer de Mama — P2
 
-## Dados
-- Amostras: 569
-- Atributos preditores: 30
-- Distribuição de classes: ~62,7% benignos / ~37,3% malignos
+- Heitor Shoji Kimura — 2077610
+- Victor Marinelli Montanari — 2046734
+- João Pedro Parussolo Santos — 2031928
 
-## Introdução e EDA
-O objetivo principal foi identificar características morfológicas das células que permitissem discriminar tumores benignos e malignos. A análise exploratória mostrou que atributos relacionados ao tamanho e irregularidade do núcleo (médias e máximos) tendem a ser maiores em tumores malignos.
+## Descrição do problema
+Classificação binária para distinguir tumores benignos e malignos usando o dataset Breast Cancer Wisconsin (UCI / Kaggle). O objetivo é treinar um classificador com boa sensibilidade (recall) para reduzir falsos negativos em contexto clínico.
 
-## Pré-processamento e Metodologia
-- Limpeza: remoção de colunas não informativas (por exemplo, `ID`) e tratamento de inconsistências.
-- Normalização: `StandardScaler` aplicado para padronizar as variáveis.
-- Divisão de dados: particionamento estratificado em treino (40%), validação (30%) e teste (30%).
-- Seleção de atributos: `SelectKBest` (teste ANOVA) para selecionar as 15 variáveis com maior poder preditivo.
+## Objetivo do projeto
+- Revisar e melhorar o notebook da P1 conforme devolutiva; aplicar validação cruzada estratificada, enriquecer a EDA, salvar o modelo final e preparar o projeto para deploy em Streamlit.
 
-## Modelos e Resultado Principal
-O estudo comparou vários classificadores (Regressão Logística, Random Forest, SVM). O melhor desempenho geral foi obtido com Regressão Logística.
+## Dataset
+- Fonte: https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data
+- Observações: 569 amostras, 30 atributos preditores. Ajuste o caminho do arquivo na célula de carregamento do notebook se necessário.
 
-- **Regressão Logística** — Acurácia: **94,74%**, F1-Score: **0,9256**, AUC-ROC: **0,9893**. Melhor equilíbrio entre precisão e sensibilidade; menor número de falsos negativos (7 casos no conjunto de teste).
-- **Random Forest** — desempenho próximo, com boa capacidade discriminativa.
-- **SVM** — apresentou alta precisão, mas gerou mais falsos negativos (12 casos) neste experimento.
+## Tipo de problema
+- Machine Learning: classificação binária (Benigno = 0, Maligno = 1)
 
-## Importância das Features
-As medidas do tipo `*_worst` (piores valores observados) foram as mais discriminativas. Entre as features mais indicativas de malignidade:
-- `concave points_worst` — aponta deformações no contorno celular.
-- `perimeter_worst`, `radius_worst` — indicam crescimento desordenado e tamanho do núcleo.
+## Metodologia (resumo)
+- Limpeza: remoção de colunas não informativas (`id`, `Unnamed: 32`).
+- Seleção de features: `SelectKBest` (ANOVA) para selecionar as 15 melhores features.
+- Normalização: `StandardScaler` aplicado quando necessário (ex.: Regressão Logística, SVM).
+- Validação: divisão treino/validação/teste (40% treino / 30% val / 30% teste) e validação cruzada estratificada (`StratifiedKFold`, 5 folds) com médias e desvios-padrão por métrica para estimativas robustas.
+- EDA: gráficos de classe alvo, boxplots, violin plots, heatmap de correlação e pairplot das variáveis mais informativas.
 
-## Discussão Clínica
-Em problemas clínicos a assimetria do custo dos erros é crítica: falsos negativos são muito mais graves que falsos positivos. Por isso, priorizar modelos com maior sensibilidade (recall) é geralmente desejável, mesmo que custe algum aumento de falsos positivos.
+## Modelos treinados
+- Regressão Logística (`LogisticRegression`)
+- Random Forest (`RandomForestClassifier`)
+- SVM (`SVC`, com `probability=True`)
 
-## Como Reproduzir
-1. Baixar o dataset: https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data
-2. Instalar dependências (ex.: `scikit-learn`, `pandas`, `numpy`, `matplotlib`, `seaborn`).
-3. Executar o notebook `projeto_14_breast_cancer_v2.ipynb` que acompanha este repositório.
+## Modelo final escolhido
+- **Modelo escolhido:** Regressão Logística (melhor equilíbrio entre acurácia e sensibilidade; AUC alta). Justificativa: apresenta menor número de falsos negativos e boa interpretabilidade para o contexto clínico.
 
-## Observações
-Se quiser, posso:
-- Inserir a tabela completa de métricas (acurácia / precisão / recall / F1 / AUC) no README;
-- Adicionar gráficos (boxplots, ROC) gerados a partir do notebook;
-- Ajustar o texto para inglês ou outro estilo de formatação.
+## Métricas de avaliação (principais)
+- Accuracy, Precision, Recall (sensibilidade), F1-score, AUC-ROC.
+- Valores principais obtidos (exemplo do experimento): Regressão Logística — Accuracy: 94.74%, F1: 0.9256, AUC: 0.9893.
 
----
-Arquivo gerado a partir do relatório do desafio (PDF) e integrado ao README.
+## Resultados principais
+- As features do tipo `*_worst` mostraram maior poder discriminativo (ex.: `concave points_worst`, `perimeter_worst`, `radius_worst`).
+- A validação cruzada estratificada (5 folds) está implementada no notebook e apresenta médias ± desvios-padrão para as métricas.
+- A EDA foi ampliada com recursos visuais que deixam mais claro o contraste entre tumores benignos e malignos.
+
+## Estrutura do repositório
+```
+projeto_14_breast_cancer/
+│
+├── app.py                    
+├── requirimente.txt
+├── README.md                
+│
+├── notebooks/
+│   └── projeto_14_breast_cancer_v2.ipynb
+│
+├── model/
+│   └── features.joblib
+│   └── model_final.joblib    
+│   └── scaler.joblib         
+├── reports/
+│   └── README.md
+│   └── all_features_stats.csv
+│   └── metrics_summary.json
+│
+└── data/
+    └── all_features_stats.csv
+    └── data.csv
+```
+
+## Tecnologias utilizadas
+- Python 3
+- Pandas e NumPy para manipulação de dados
+- Matplotlib e Seaborn para visualizações
+- Scikit-learn para modelagem e avaliação
+- Joblib para serialização do modelo
+- Jupyter Notebook para experimentação
+- Streamlit para interface web
+
+## Como reproduzir (notebook)
+1. Criar e ativar um ambiente virtual Python recomendado:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Linux/macOS
+```
+
+2. Instalar dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Abrir e executar `notebooks/projeto_14_breast_cancer_v2.ipynb` em Jupyter Notebook / JupyterLab.
+4. Ajustar a célula de carregamento de dados se o dataset estiver em outro caminho.
+
+## Uso do modelo salvo (Joblib)
+O notebook salva o melhor modelo em `model/model_final.joblib` e, quando aplicável, o `StandardScaler` em `model/scaler.joblib`.
+
+Exemplo de carregamento em Python (app Streamlit ou script):
+
+```python
+import joblib
+from pathlib import Path
+
+model = joblib.load(Path('model') / 'model_final.joblib')
+scaler_path = Path('model') / 'scaler.joblib'
+if scaler_path.exists():
+    scaler = joblib.load(scaler_path)
+    # aplicar scaler.transform(X) antes de model.predict()
+
+# predição de exemplo (X deve ser DataFrame ou ndarray com colunas na ordem esperada)
+# X_proc = scaler.transform(X) if scaler is not None else X
+# y_pred = model.predict(X_proc)
+```
+
+## Instruções para executar o app Streamlit
+1. Ative o ambiente virtual:
+
+```bash
+source .venv/bin/activate
+```
+
+2. Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Execute o aplicativo:
+
+```bash
+streamlit run app.py
+```
+
+4. Abra no navegador o endereço exibido no terminal (normalmente `http://localhost:8501`).
+
+## Link do app publicado
+- Ainda não publicado. Inserir aqui o link do Streamlit Community Cloud após o deploy.
+
+## Limitações e observações
+- Este repositório contém o notebook finalizado e o código para salvar o modelo; a aplicação Streamlit e o relatório em PDF devem ser gerados e adicionados antes da submissão final no Moodle.
+- Em contexto clínico, resultados devem ser interpretados por especialistas e o modelo não substitui exame clínico ou patologia.
+
+## Conclusão
+O projeto atingiu o objetivo de construir e avaliar um classificador para câncer de mama com bom desempenho, destacando a Regressão Logística como modelo final pelo equilíbrio entre desempenho, sensibilidade e interpretabilidade. Como próximos passos, recomenda-se publicar o app em produção, versionar resultados por experimento e ampliar validações para reforçar robustez clínica.
