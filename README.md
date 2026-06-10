@@ -24,7 +24,8 @@ Classificação binária para distinguir tumores benignos e malignos usando o da
 - Limpeza: remoção de colunas não informativas (`id`, `Unnamed: 32`).
 - Seleção de features: `SelectKBest` (ANOVA) para selecionar as 15 melhores features.
 - Normalização: `StandardScaler` aplicado quando necessário (ex.: Regressão Logística, SVM).
-- Validação: divisão treino/validação/teste (40% treino / 30% val / 30% teste) e validação cruzada estratificada (`StratifiedKFold`, 5 folds) para estimativas robustas.
+- Validação: divisão treino/validação/teste (40% treino / 30% val / 30% teste) e validação cruzada estratificada (`StratifiedKFold`, 5 folds) com médias e desvios-padrão por métrica para estimativas robustas.
+- EDA: gráficos de classe alvo, boxplots, violin plots, heatmap de correlação e pairplot das variáveis mais informativas.
 
 ## Modelos treinados
 - Regressão Logística (`LogisticRegression`)
@@ -41,6 +42,7 @@ Classificação binária para distinguir tumores benignos e malignos usando o da
 ## Resultados principais
 - As features do tipo `*_worst` mostraram maior poder discriminativo (ex.: `concave points_worst`, `perimeter_worst`, `radius_worst`).
 - A validação cruzada estratificada (5 folds) está implementada no notebook e apresenta médias ± desvios-padrão para as métricas.
+- A EDA foi ampliada com recursos visuais que deixam mais claro o contraste entre tumores benignos e malignos.
 
 ## Estrutura do repositório
 ```
